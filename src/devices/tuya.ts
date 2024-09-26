@@ -4056,12 +4056,13 @@ const definitions: DefinitionWithExtend[] = [
         configure: tuya.configureMagicPacket,
         fromZigbee: [tuya.fz.datapoints],
         toZigbee: [tuya.tz.datapoints],
+        options: [exposes.options.invert_cover()],
         exposes: [e.cover_position().setAccess('position', ea.STATE_SET), e.battery()],
         meta: {
             tuyaDatapoints: [
                 [1, 'state', tuya.valueConverterBasic.lookup({OPEN: tuya.enum(0), STOP: tuya.enum(1), CLOSE: tuya.enum(2)})],
-                [2, 'position', tuya.valueConverter.coverPosition],
-                [3, 'position', tuya.valueConverter.raw],
+                [2, 'position', tuya.valueConverter.coverPositionInverted],
+                [3, 'position', tuya.valueConverter.coverPositionInverted],
                 // motor_direction doesn't work: https://github.com/Koenkk/zigbee2mqtt/issues/18103
                 // [5, 'motor_direction', tuya.valueConverterBasic.lookup({'normal': tuya.enum(0), 'reversed': tuya.enum(1)})],
                 [101, 'battery', tuya.valueConverter.raw],
